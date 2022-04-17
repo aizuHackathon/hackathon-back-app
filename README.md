@@ -6,6 +6,11 @@
 - [heroku cli](https://devcenter.heroku.com/ja/articles/heroku-cli#install-the-heroku-cli)
 - [postgres](https://www.postgresql.org/)
 
+## golang & postgres
+    // golang & postgres の立ち上げ
+    // golang はホットリロードではないため変更するごとにcontainerにいってリロードボタンを押す必要がある
+    $ docker-compose up -d
+
 ## postgres(local環境)
 - postgres local環境はdockerにて管理
 - 初回リロード時~/init/init.sqlをもとにsqlインジェクションを行う
