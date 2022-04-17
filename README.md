@@ -1,4 +1,10 @@
-# hackathon-back-app 
+# hackathon-back-app
+
+## 無限環境構築編
+- [golang](https://go.dev/)
+- [docker](https://www.docker.com/)
+- [heroku cli](https://devcenter.heroku.com/ja/articles/heroku-cli#install-the-heroku-cli)
+- [postgres](https://www.postgresql.org/)
 
 ## postgres(local環境)
 - postgres local環境はdockerにて管理
