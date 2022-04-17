@@ -1,2 +1,9 @@
-FROM postgres:11-alpine
-ENV LANG ja_JP.utf8
+FROM golang:1.18-alpine
+
+RUN apk update &&  apk add git
+
+WORKDIR /go/src/app
+
+ADD ./go .
+
+RUN go mod tidy

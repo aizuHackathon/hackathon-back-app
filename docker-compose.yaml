@@ -1,9 +1,20 @@
 version: '3'
 services:
-  db:
+  app:
     build: .
     ports:
-      - 8080:8080
+      - "8080:8080"
+    volumes:
+      - ./go:/go/src/app
+    tty: true
+    depends_on:
+      - postgres
+    command: go run main.go
+
+  postgres:
+    build: ./postgres/
+    ports:
+      - "3306:3306"
     environment:
       POSTGRES_USER: admin
       POSTGRES_DB: admin
