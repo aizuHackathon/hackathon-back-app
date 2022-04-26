@@ -20,4 +20,4 @@ services:
       POSTGRES_DB: admin
       POSTGRES_PASSWORD: admin
     volumes:
-      - ./init:/docker-entrypoint-initdb.d
+      - ./postgres/init:/docker-entrypoint-initdb.d

@@ -26,7 +26,7 @@
         $ docker-compose up -d
 
         // terminalとpostgresを繋げる
-        $ docker-compose exec db bash
+        $ docker-compose exec postgres bash
 
         // postgresにlogin
         $ psql -U admin
