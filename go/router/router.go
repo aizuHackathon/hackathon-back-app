@@ -29,6 +29,10 @@ func Init(e *echo.Echo) {
 		return c.String(http.StatusOK, "hello")
 	})
 
+	e.GET("/mongon", func(c echo.Context) error{
+		return c.String(http.StatusOK, "mongon")
+	})
+
 	e.Logger.Fatal(e.Start(":8080"))
 }
 
