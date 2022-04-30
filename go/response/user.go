@@ -4,7 +4,7 @@ import "app/model"
 
 type (
 	User struct {
-		ID     int64   `json:"id"`
+		User_ID     int64   `json:"id"`
 		Name   string  `json:"name"`
 		Height float32 `json:"height"`
 		Weight float32 `json:"weight"`
@@ -21,7 +21,7 @@ func NewUser(m *model.User) *User {
 	}
 
 	return &User{
-		ID:     m.ID,
+		User_ID:     m.User_ID,
 		Name:   m.Name,
 		Height: m.Height,
 		Weight: m.Weight,
