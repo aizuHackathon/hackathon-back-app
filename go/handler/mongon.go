@@ -10,12 +10,12 @@ import (
 )
 
 type (
-	IUser interface {
+	IMongoninterface {
 		Index(c echo.Context) error
 	}
 
-	User struct {
-		userService service.IMongon
+	Mongon struct {
+		mongonService service.IMongon
 	}
 
 	JSONMongonIndex struct {
