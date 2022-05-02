@@ -13,13 +13,13 @@ type (
 	}
 
 	V1 struct {
-		MongonHnadler handler.IMongon
+		MongonHandler handler.IMongon
 	}
 )
 
 func Init(e *echo.Echo) {
 	var r IV1 = &V1{
-		MongonHandler: handler.NewMongon()
+		MongonHandler: handler.NewMongon(),
 	}
 
 	r.withNone(e)
@@ -33,5 +33,5 @@ func Init(e *echo.Echo) {
 }
 
 func (r V1) withNone(e *echo.Echo) {
-	e.GET("/mongon", r.mongonHandler.Index)
+	e.GET("/mongon", r.MongonHandler.Index)
 }
