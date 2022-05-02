@@ -29,12 +29,12 @@ func NewMongon() IMongon {
 	}
 }
 
-func (h *mongon) Index(c echo.Context) error {
-	mongon, err := h.mongonService.GetAllMongons()
+func (h *Mongon) Index(c echo.Context) error {
+	mongons, err := h.mongonService.GetAllMongons()
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}
-	if len(*mongon) == 0 {
+	if len(*mongons) == 0 {
 		return c.JSON(http.StatusBadRequest, "mongon is not found")
 	}
 
