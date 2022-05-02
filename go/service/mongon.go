@@ -6,11 +6,11 @@ import (
 )
 
 type (
-	IUser interface {
+	IMongon interface {
 		GetAllMongons() (*model.Mongons, error)
 	}
 
-	User struct {
+	Mongon struct {
 		repository repository.IMongon
 	}
 )

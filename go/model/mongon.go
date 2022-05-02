@@ -1,8 +1,8 @@
 package model
 
 type Mongon struct {
-	Id     int64
+	ID     int64
 	Mongon   string
 }
 
-type Mongons []User
+type Mongons []Mongon

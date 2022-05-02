@@ -4,7 +4,7 @@ import "app/model"
 
 type (
 	Mongon struct {
-		Id     int64   `json:"id"`
+		ID     int64   `json:"id"`
 		Mongon   string  `json:"mongon"`
 	}
 
@@ -16,8 +16,8 @@ func NewMongon(m *model.Mongon) *Mongon {
 		return nil
 	}
 
-	return &User{
-		Id:     m.Id,
+	return &Mongon{
+		ID:     m.ID,
 		Mongon:   m.Mongon,
 	}
 }

@@ -10,7 +10,7 @@ import (
 )
 
 type (
-	IMongoninterface {
+	IMongon interface {
 		Index(c echo.Context) error
 	}
 
@@ -30,7 +30,7 @@ func NewMongon() IMongon {
 }
 
 func (h *mongon) Index(c echo.Context) error {
-	mongon, err := h.mongonService.GetAllMongon()
+	mongon, err := h.mongonService.GetAllMongons()
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}
@@ -39,6 +39,6 @@ func (h *mongon) Index(c echo.Context) error {
 	}
 
 	return c.JSON(200, &JSONMongonIndex{
-		Mongon: response.NewMongon(mongon),
+		Mongons: response.NewMongons(mongons),
 	})
 }
