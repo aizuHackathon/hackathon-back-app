@@ -13,7 +13,7 @@ type (
 	}
 
 	V1 struct {
-		mongonHnadler handler.IMongon
+		MongonHnadler handler.IMongon
 	}
 )
 
