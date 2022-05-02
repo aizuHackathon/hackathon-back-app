@@ -28,13 +28,10 @@ func Init(e *echo.Echo) {
 	e.GET("/hello", func(c echo.Context) error {
 		return c.String(http.StatusOK, "hello")
 	})
-	e.GET("/mongon", func(c echo.Context) error {
-		return c.String(http.StatusOK, "mongon")
-	})
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
 
 func (r V1) withNone(e *echo.Echo) {
-	//e.GET("/mongon", r.mongonHandler.Index)
+	e.GET("/mongon", r.mongonHandler.Index)
 }
