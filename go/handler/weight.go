@@ -31,14 +31,19 @@ func NewWeight() IWeight {
 }
 
 func (h *Weight) Index(c echo.Context) error {
-	user_id, err := strconv.ParseInt(c.QueryParam("id"), 10, 64)
-	if err != nil {
-		return c.JSON(http.StatusBadRequest, "id is not int")
+	ID := c.QueryParam("id")
+	if len(ID) == 0 {
+		return c.JSON(http.StatusBadRequest, "id is required")
 	}
-	weights, err := h.weightService.GetAllWeights(int64(user_id))
+	userId, err := strconv.ParseInt(ID, 10, 64)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, "id is invalid")
+	}
+	weights, err := h.weightService.GetWeightsByUserID(int64(userId))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}
+	// TODO: discuss with frontend
 	if len(*weights) == 0 {
 		return c.JSON(http.StatusBadRequest, "weights is not found")
 	}

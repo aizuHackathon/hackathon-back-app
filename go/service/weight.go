@@ -7,7 +7,7 @@ import (
 
 type (
 	IWeight interface {
-		GetAllWeights(id int64) (*model.Weights, error)
+		GetWeightsByUserID(id int64) (*model.Weights, error)
 	}
 
 	Weight struct {
@@ -21,7 +21,7 @@ func NewWeight() IWeight {
 	}
 }
 
-func (s *Weight) GetAllWeights(id int64) (*model.Weights, error) {
+func (s *Weight) GetWeightsByUserID(id int64) (*model.Weights, error) {
 	m, err := s.repository.ByUserID(id)
 	if err != nil {
 		return nil, err
