@@ -21,12 +21,12 @@ func NewUser(m *model.User) *User {
 	}
 
 	return &User{
-		ID:     m.ID,
-		Name:   m.Name,
-		Height: m.Height,
-		Weight: m.Weight,
-		Sex:    m.Sex,
-		Old:    m.Old,
+		ID:      m.ID,
+		Name:    m.Name,
+		Height:  m.Height,
+		Weight:  m.Weight,
+		Sex:     m.Sex,
+		Old:     m.Old,
 	}
 }
 
