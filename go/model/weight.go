@@ -1,7 +1,7 @@
 package model
 
 type Weight struct {
-	ID				int64
+	ID        int64
 	User_ID		int64
 	Value 		float32
 }

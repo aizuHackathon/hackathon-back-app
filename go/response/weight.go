@@ -4,9 +4,9 @@ import "app/model"
 
 type (
 	Weight struct {
-		ID	int64 `json:"id"`
+		ID      int64 `json:"id"`
 		User_ID int64 `json:"user_id"`
-		Value float32 `json:"value"`
+		Value   float32 `json:"value"`
 	}
 
 	Weights []Weight
@@ -18,9 +18,9 @@ func NewWeight(m *model.Weight) *Weight {
 	}
 
 	return &Weight{
-		ID: m.ID,
+		ID:      m.ID,
 		User_ID: m.User_ID,
-		Value: m.Value,
+		Value:   m.Value,
 	}
 }
 

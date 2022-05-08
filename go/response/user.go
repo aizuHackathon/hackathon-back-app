@@ -21,7 +21,7 @@ func NewUser(m *model.User) *User {
 	}
 
 	return &User{
-		ID: m.ID,
+		ID:      m.ID,
 		Name:    m.Name,
 		Height:  m.Height,
 		Weight:  m.Weight,

@@ -39,7 +39,7 @@ func (h *Weight) Index(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, "id is invalid")
 	}
-	weights, err := h.weightService.GetWeightsByUserID(int64(userId))
+	weights, err := h.weightService.GetWeightsByUserID(userId)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}
