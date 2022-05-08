@@ -13,5 +13,12 @@ CREATE TABLE Users (
     PRIMARY KEY (ID)
 );
 
-INSERT INTO Users VALUES (1, 'Aizu Taro', 164.2, 58.8, 0, 21),
-    (2, 'Aizu Hanako', 164.2, 58.8, 0, 21);
+CREATE TABLE Keihatus(
+    ID SERIAL NOT NULL,
+    Value VARCHAR(200)
+);
+
+INSERT INTO Users(ID, Name, Height, Weight,Sex, Old) VALUES (1, 'Aizu Taro', 164.2, 58.8, 0, 21),
+(2, 'Aizu Hanako', 164.2, 58.8, 0, 21);
+
+INSERT INTO Keihatus(ID, Value) VALUES (1, 'Move  fat'),(2, 'Good training');
