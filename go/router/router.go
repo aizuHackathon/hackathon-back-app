@@ -15,6 +15,7 @@ type (
 	V1 struct {
 		userHandler    handler.IUser
 		keihatuHandler handler.IKeihatu
+		weightHandler  handler.IWeight
 	}
 )
 
@@ -22,6 +23,7 @@ func Init(e *echo.Echo) {
 	var r IV1 = &V1{
 		userHandler:    handler.NewUser(),
 		keihatuHandler: handler.NewKeihatu(),
+		weightHandler:  handler.NewWeight(),
 	}
 
 	r.withNone(e)
@@ -37,4 +39,6 @@ func Init(e *echo.Echo) {
 func (r V1) withNone(e *echo.Echo) {
 	e.GET("/users", r.userHandler.Index)
 	e.GET("/keihatus", r.keihatuHandler.Index)
+	e.GET("/weight", r.weightHandler.Index)
+
 }
