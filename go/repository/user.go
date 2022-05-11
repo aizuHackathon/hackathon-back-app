@@ -11,6 +11,7 @@ import (
 type (
 	IUser interface {
 		ByIDs(ids []int64) (*model.Users, error)
+		Create(m *model.CreateUser) error
 	}
 
 	User struct {
@@ -38,4 +39,16 @@ func (r *User) ByIDs(ids []int64) (*model.Users, error) {
 		return nil, fmt.Errorf("fetch error :%v", err)
 	}
 	return m, nil
+}
+
+func (r *User) Create(m *model.CreateUser) error {
+	_, err := r.session.InsertInto("users").
+		Columns("name", "height", "weight", "sex", "old").
+		Record(m).
+		Exec()
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

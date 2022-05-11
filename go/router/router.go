@@ -13,14 +13,14 @@ type (
 	}
 
 	V1 struct {
-		userHandler handler.IUser
+		userHandler   handler.IUser
 		weightHandler handler.IWeight
 	}
 )
 
 func Init(e *echo.Echo) {
 	var r IV1 = &V1{
-		userHandler: handler.NewUser(),
+		userHandler:   handler.NewUser(),
 		weightHandler: handler.NewWeight(),
 	}
 
@@ -36,5 +36,6 @@ func Init(e *echo.Echo) {
 
 func (r V1) withNone(e *echo.Echo) {
 	e.GET("/users", r.userHandler.Index)
+	e.POST("/users", r.userHandler.Create)
 	e.GET("/weight", r.weightHandler.Index)
 }
