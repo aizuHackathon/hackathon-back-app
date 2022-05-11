@@ -35,7 +35,6 @@ func (s *User) GetAllUsers() (*model.Users, error) {
 
 func (s *User) Create(f *form.User) error {
 	m := &model.CreateUser{
-		// ID:     f.ID,
 		Name:   f.Name,
 		Height: f.Height,
 		Weight: f.Weight,
