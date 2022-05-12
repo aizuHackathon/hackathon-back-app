@@ -19,7 +19,7 @@ type (
 	}
 
 	JSONMongonIndex struct {
-		Mongons *response.Mongons `json:"mongons"`
+		Mongons *response.Mongons `json:"mongon"`
 	}
 )
 

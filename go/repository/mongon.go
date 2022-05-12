@@ -33,9 +33,11 @@ func (r *Mongon) ByIDs(ids []int64) (*model.Mongons, error) {
 		}
 		return m, nil
 	}
-	_, err := r.session.Select("*").From("Mongons").Load(m)
+	number := 2
+	_, err := r.session.Select("*").From("Mongons").Where("id = ?",number).Load(m)
 	if err != nil {
 		return nil, fmt.Errorf("fetch error :%v", err)
 	}
+	
 	return m, nil
 }
