@@ -10,3 +10,11 @@ type User struct {
 }
 
 type Users []User
+
+type CreateUser struct {
+	Name   string
+	Height float32
+	Weight float32
+	Sex    int64
+	Old    int64
+}

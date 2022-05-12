@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"app/form"
 	"app/response"
 	"app/service"
 	"fmt"
@@ -12,6 +13,7 @@ import (
 type (
 	IUser interface {
 		Index(c echo.Context) error
+		Create(c echo.Context) error
 	}
 
 	User struct {
@@ -41,4 +43,17 @@ func (h *User) Index(c echo.Context) error {
 	return c.JSON(200, &JSONUserIndex{
 		Users: response.NewUsers(users),
 	})
+}
+
+func (h *User) Create(c echo.Context) error {
+	f, err := form.NewUser(c)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
+	}
+
+	if err := h.userService.Create(f); err != nil {
+		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
+	}
+
+	return c.JSON(201, nil)
 }

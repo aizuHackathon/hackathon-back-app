@@ -3,6 +3,7 @@ module app
 go 1.18
 
 require (
+	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d
 	github.com/gocraft/dbr v0.0.0-20190714181702-8114670a83bd
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/lib/pq v1.1.1
