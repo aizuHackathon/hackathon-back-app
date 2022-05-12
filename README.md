@@ -28,8 +28,8 @@
         // terminalとpostgresを繋げる
         $ docker-compose exec postgres bash
 
-        // postgresにlogin
-        $ psql -U admin
+        // postgresにlogin test dbに移動
+        $ psql -U admin test
     ### init.sql等を更新した時にすること
         // dockerを落とす
         $ docker-compose down -v
