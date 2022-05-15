@@ -4,6 +4,7 @@ import (
 	"app/db"
 	"app/model"
 	"fmt"
+	"math/rand"
 
 	"github.com/gocraft/dbr"
 )
@@ -33,8 +34,7 @@ func (r *Mongon) ByIDs(ids []int64) (*model.Mongons, error) {
 		}
 		return m, nil
 	}
-	number := 2
-	_, err := r.session.Select("*").From("Mongons").Where("id = ?",number).Load(m)
+	_, err := r.session.Select("*").From("Mongons").Where("id = ?",rand.Intn(2) + 1).Load(m)
 	if err != nil {
 		return nil, fmt.Errorf("fetch error :%v", err)
 	}
