@@ -7,7 +7,6 @@ type (
 		ID     int64   `json:"id"`
 		Name   string  `json:"name"`
 		Height float32 `json:"height"`
-		Weight float32 `json:"weight"`
 		Sex    int64   `json:"sex"`
 		Old    int64   `json:"old"`
 	}
@@ -21,12 +20,11 @@ func NewUser(m *model.User) *User {
 	}
 
 	return &User{
-		ID:      m.ID,
-		Name:    m.Name,
-		Height:  m.Height,
-		Weight:  m.Weight,
-		Sex:     m.Sex,
-		Old:     m.Old,
+		ID:     m.ID,
+		Name:   m.Name,
+		Height: m.Height,
+		Sex:    m.Sex,
+		Old:    m.Old,
 	}
 }
 
