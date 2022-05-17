@@ -6,11 +6,13 @@ import (
 	"fmt"
 
 	"github.com/gocraft/dbr"
+	"github.com/labstack/gommon/log"
 )
 
 type (
 	IWeight interface {
 		ByUserID(id int64) (*model.Weights, error)
+		Create(m *model.CreateWeight) error
 	}
 
 	Weight struct {
@@ -30,5 +32,18 @@ func (r *Weight) ByUserID(id int64) (*model.Weights, error) {
 	if err != nil {
 		return nil, fmt.Errorf("fetch error :%v", err)
 	}
+	log.Infof("get value: %v", m)
 	return m, nil
+}
+
+func (r *Weight) Create(m *model.CreateWeight) error {
+	_, err := r.session.InsertInto("weights").
+		Columns("user_id", "value").
+		Record(m).
+		Exec()
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
