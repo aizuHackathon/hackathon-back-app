@@ -6,7 +6,6 @@ import (
 	"fmt"
 
 	"github.com/gocraft/dbr"
-	"github.com/labstack/gommon/log"
 )
 
 type (
@@ -32,7 +31,6 @@ func (r *Weight) ByUserID(id int64) (*model.Weights, error) {
 	if err != nil {
 		return nil, fmt.Errorf("fetch error :%v", err)
 	}
-	log.Infof("get value: %v", m)
 	return m, nil
 }
 
