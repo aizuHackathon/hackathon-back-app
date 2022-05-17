@@ -10,6 +10,7 @@ import (
 type (
 	IUser interface {
 		GetAllUsers() (*model.Users, error)
+		GetNameCount(f *form.UserName) (int64, error)
 		Create(f *form.User) error
 	}
 
@@ -33,6 +34,15 @@ func (s *User) GetAllUsers() (*model.Users, error) {
 	}
 
 	return m, nil
+}
+
+func (s *User) GetNameCount(f *form.UserName) (int64, error) {
+	count, err := s.userRepository.CountName(f.Name)
+	if err != nil {
+		return count, err
+	}
+
+	return count, nil
 }
 
 func (s *User) Create(f *form.User) error {
