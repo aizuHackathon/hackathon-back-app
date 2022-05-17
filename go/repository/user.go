@@ -28,7 +28,7 @@ func NewUser() IUser {
 func (r *User) ByIDs(ids []int64) (*model.Users, error) {
 	m := &model.Users{}
 	if len(ids) != 0 {
-		_, err := r.session.Select("*").From("Users").Where("id IN ?", ids).Load(m)
+		_, err := r.session.Select("*").From("users").Where("id IN ?", ids).Load(m)
 		if err != nil {
 			return nil, fmt.Errorf("fetch error :%v", err)
 		}
