@@ -12,6 +12,7 @@ type (
 		Weight float32 `json:"weight" valid:"required~user weight を入力してください"`
 		Sex    int64   `json:"sex" valid:"required~user sex を入力してください"`
 		Old    int64   `json:"old" valid:"required~user old を入力してください"`
+		Pass   string  `json:"pass" valid:"required~user pass を入力してください"`
 	}
 )
 

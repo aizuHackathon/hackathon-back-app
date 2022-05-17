@@ -6,15 +6,16 @@ CREATE TABLE users (
     id SERIAL,
     name VARCHAR(200),
     height REAL,
-    weight REAL,
     sex INTEGER,
     old INTEGER,
+    pass VARCHAR(200),
+    state INTEGER DEFAULT 0,
     created_at timestamp NOT NULL default current_timestamp,
     PRIMARY KEY (id)
 );
 
-INSERT INTO users(name, height, weight, sex, old) VALUES ('Aizu Taro', 164.2, 58.8, 0, 21),
-    ('Aizu Hanako', 164.2, 58.8, 0, 21);
+INSERT INTO users(name, height, sex, old, pass) VALUES ('Aizu Taro', 164.2, 0, 21, 'test'),
+    ('Aizu Hanako', 164.2, 0, 21, 'test');
 
 CREATE TABLE weights (
     id SERIAL,
