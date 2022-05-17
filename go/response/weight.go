@@ -1,12 +1,16 @@
 package response
 
-import "app/model"
+import (
+	"app/model"
+	"time"
+)
 
 type (
 	Weight struct {
-		ID      int64 `json:"id"`
-		User_ID int64 `json:"user_id"`
-		Value   float32 `json:"value"`
+		ID         int64     `json:"id"`
+		User_ID    int64     `json:"user_id"`
+		Value      float32   `json:"value"`
+		Created_At time.Time `json:"create_at"`
 	}
 
 	Weights []Weight
@@ -18,9 +22,10 @@ func NewWeight(m *model.Weight) *Weight {
 	}
 
 	return &Weight{
-		ID:      m.ID,
-		User_ID: m.User_ID,
-		Value:   m.Value,
+		ID:         m.ID,
+		User_ID:    m.User_ID,
+		Value:      m.Value,
+		Created_At: m.Created_at,
 	}
 }
 
