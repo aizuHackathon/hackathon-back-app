@@ -12,6 +12,7 @@ type (
 	IUser interface {
 		ByIDs(ids []int64) (*model.Users, error)
 		GetIDByNamePass(name, pass string) (*int64, error)
+		CountName(name string) (int64, error)
 		Create(m *model.CreateUser) error
 	}
 
@@ -62,6 +63,17 @@ func (r *User) GetIDByNamePass(name, pass string) (*int64, error) {
 	}
 
 	return &(*user).ID, nil
+}
+
+func (r *User) CountName(name string) (int64, error) {
+	var count = int64(1)
+	_, err := r.session.Select("COUNT(*)").From("users").
+		Where("name = ?", name).
+		Load(&count)
+	if err != nil {
+		return 1, fmt.Errorf("fetch error :%v", err)
+	}
+	return count, nil
 }
 
 func (r *User) Create(m *model.CreateUser) error {
