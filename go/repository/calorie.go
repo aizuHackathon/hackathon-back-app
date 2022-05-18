@@ -11,6 +11,7 @@ import (
 type (
 	ICalorie interface {
 		ByUserID(id int64, calorieType int64) (*model.Calories, error)
+		Create(m *model.CreateCalorie) error
 	}
 
 	Calorie struct {
@@ -35,4 +36,16 @@ func (r *Calorie) ByUserID(id int64, calorieType int64) (*model.Calories, error)
 		return nil, fmt.Errorf("fetch error :%v", err)
 	}
 	return m, nil
+}
+
+func (r *Calorie) Create(m *model.CreateCalorie) error {
+	_, err := r.session.InsertInto("calories").
+		Columns("user_id", "calorie_type", "value").
+		Record(m).
+		Exec()
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

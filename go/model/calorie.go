@@ -11,3 +11,9 @@ type Calorie struct {
 }
 
 type Calories []Calorie
+
+type CreateCalorie struct {
+	User_ID      int64
+	Calorie_type int64
+	Value        int64
+}
