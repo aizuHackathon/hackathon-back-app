@@ -12,10 +12,6 @@ type (
 	}
 
 	Calories []Calorie
-
-	Status struct {
-		Value string `json:"value"`
-	}
 )
 
 func NewCalorie(m *model.Calorie) *Calorie {
@@ -44,20 +40,4 @@ func NewCalories(m *model.Calories) *Calories {
 	}
 
 	return &ret
-}
-
-func NewStatus(status int64) *Status {
-	if status == 0 {
-		return &Status{
-			Value: "first",
-		}
-	} else if status == 1 {
-		return &Status{
-			Value: "second",
-		}
-	} else {
-		return &Status{
-			Value: "third",
-		}
-	}
 }

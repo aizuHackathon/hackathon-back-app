@@ -25,10 +25,6 @@ type (
 	JSONCalorieIndex struct {
 		Calories *response.Calories `json:"calories"`
 	}
-
-	JSONStatusIndex struct {
-		Status *response.Status `json:"status"`
-	}
 )
 
 func NewCalorie() ICalorie {
@@ -77,14 +73,11 @@ func (h *Calorie) GetStatus(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, "id is invalid")
 	}
 	status, err := h.calorieService.GetStatus(userId)
-	fmt.Println("status", status)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}
 
-	return c.JSON(200, &JSONStatusIndex{
-		Status: response.NewStatus(status),
-	})
+	return c.JSON(200, status)
 }
 
 func (h *Calorie) Create(c echo.Context) error {

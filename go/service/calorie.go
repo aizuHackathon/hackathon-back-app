@@ -43,12 +43,10 @@ func (s *Calorie) GetStatus(userId int64) (int64, error) {
 	if err != nil {
 		return -1, err
 	}
-	// TODO: change border
-	fmt.Println(mealCalorie.Value, exerciseCalorie.Value)
-	if float32(exerciseCalorie.Value)*0.6+float32(mealCalorie.Value)*0.4 > 500 {
-		return 0, nil
-	} else {
+	if float32(exerciseCalorie.Value)*0.7+float32(mealCalorie.Value)*0.3 > 11340 {
 		return 1, nil
+	} else {
+		return 0, nil
 	}
 }
 
