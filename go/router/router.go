@@ -41,5 +41,7 @@ func (r V1) withNone(e *echo.Echo) {
 	e.GET("/weight", r.weightHandler.Index)
 	e.POST("/weight", r.weightHandler.Create)
 
-	e.GET("name", r.userHandler.CheckName)
+	e.GET("/name", r.userHandler.CheckName)
+
+	e.GET("/login", r.userHandler.Login)
 }
