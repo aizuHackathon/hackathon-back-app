@@ -47,4 +47,6 @@ func (r V1) withNone(e *echo.Echo) {
 	e.POST("/calorie", r.calorieHandler.Create)
 
 	e.GET("/name", r.userHandler.CheckName)
+
+	e.GET("/evolution", r.calorieHandler.GetStatus)
 }

@@ -17,3 +17,7 @@ type CreateCalorie struct {
 	Calorie_type int64
 	Value        int64
 }
+
+type Status struct {
+	Value int64
+}
