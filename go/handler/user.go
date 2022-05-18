@@ -13,6 +13,7 @@ import (
 type (
 	IUser interface {
 		Index(c echo.Context) error
+		CheckName(c echo.Context) error
 		Create(c echo.Context) error
 	}
 
@@ -43,6 +44,23 @@ func (h *User) Index(c echo.Context) error {
 	return c.JSON(200, &JSONUserIndex{
 		Users: response.NewUsers(users),
 	})
+}
+
+func (h *User) CheckName(c echo.Context) error {
+	f, err := form.NewUserName(c)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
+	}
+
+	count, err := h.userService.GetNameCount(f)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
+	}
+	if count != int64(0) {
+		return c.JSON(http.StatusBadRequest, "name is used")
+	}
+
+	return c.JSON(201, nil)
 }
 
 func (h *User) Create(c echo.Context) error {
