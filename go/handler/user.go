@@ -94,9 +94,12 @@ func (h *User) Create(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}
 
-	if err := h.userService.Create(f); err != nil {
+	id, err := h.userService.Create(f)
+	if err != nil {
 		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}
 
-	return c.JSON(201, nil)
+	return c.JSON(201, &JSONUserID{
+		ID: id,
+	})
 }

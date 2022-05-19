@@ -12,7 +12,7 @@ type (
 		GetAllUsers() (*model.Users, error)
 		GetNameCount(f *form.UserName) (int64, error)
 		GetUserIdByNamePass(name, pass string) (*int64, error)
-		Create(f *form.User) error
+		Create(f *form.User) (*int64, error)
 	}
 
 	User struct {
@@ -55,7 +55,7 @@ func (s *User) GetUserIdByNamePass(name, pass string) (*int64, error) {
 	return id, nil
 }
 
-func (s *User) Create(f *form.User) error {
+func (s *User) Create(f *form.User) (*int64, error) {
 	name := f.Name
 	pass := f.Pass
 	m := &model.CreateUser{
@@ -67,12 +67,12 @@ func (s *User) Create(f *form.User) error {
 	}
 
 	if err := s.userRepository.Create(m); err != nil {
-		return fmt.Errorf("failed to create user: %v, err: %w", m, err)
+		return nil, fmt.Errorf("failed to create user: %v, err: %w", m, err)
 	}
 
 	id, err := s.userRepository.GetIDByNamePass(name, pass)
 	if err != nil {
-		return fmt.Errorf("failed to get userId, name: %v, pass: %v, err: %w", name, pass, err)
+		return nil, fmt.Errorf("failed to get userId, name: %v, pass: %v, err: %w", name, pass, err)
 	}
 
 	createWeight := &model.CreateWeight{
@@ -81,8 +81,8 @@ func (s *User) Create(f *form.User) error {
 	}
 
 	if err := s.weightRepository.Create(createWeight); err != nil {
-		return fmt.Errorf("failed to create weight: %v, err: %w", createWeight, err)
+		return nil, fmt.Errorf("failed to create weight: %v, err: %w", createWeight, err)
 	}
 
-	return nil
+	return id, nil
 }
