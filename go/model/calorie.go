@@ -18,3 +18,17 @@ type Calorie struct {
 }
 
 type Calories []Calorie
+
+type CreateCalorie struct {
+	User_ID      int64
+	Calorie_type CalorieType
+	Value        int64
+}
+
+func (c CalorieType) IsInvalid() bool {
+	switch c {
+	case CalorieTypeMeal, CalorieTypeWorkout:
+		return false
+	}
+	return true
+}
