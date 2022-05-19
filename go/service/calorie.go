@@ -9,9 +9,9 @@ import (
 
 type (
 	ICalorie interface {
-		GetCaloriesByUserID(id int64, calorieType int64) (*model.Calories, error)
+		GetCaloriesByUserIdCalorieType(id int64, calorieType model.CalorieType) (*model.Calories, error)
 		GetStatus(userId int64) (int64, error)
-		Create(f *form.Calorie, userId int64, calorieType int64) error
+		Create(f *form.Calorie, userId int64, calorieType model.CalorieType) error
 	}
 
 	Calorie struct {
@@ -25,8 +25,8 @@ func NewCalorie() ICalorie {
 	}
 }
 
-func (s *Calorie) GetCaloriesByUserID(id int64, calorieType int64) (*model.Calories, error) {
-	m, err := s.repository.ByUserID(id, calorieType)
+func (s *Calorie) GetCaloriesByUserIdCalorieType(id int64, calorieType model.CalorieType) (*model.Calories, error) {
+	m, err := s.repository.ByUserIdCalorieType(id, calorieType)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ func (s *Calorie) GetStatus(userId int64) (int64, error) {
 	}
 }
 
-func (s *Calorie) Create(f *form.Calorie, userId int64, calorieType int64) error {
+func (s *Calorie) Create(f *form.Calorie, userId int64, calorieType model.CalorieType) error {
 	m := &model.CreateCalorie{
 		User_ID:      userId,
 		Calorie_type: calorieType,

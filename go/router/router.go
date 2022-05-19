@@ -49,4 +49,6 @@ func (r V1) withNone(e *echo.Echo) {
 	e.GET("/name", r.userHandler.CheckName)
 
 	e.GET("/evolution", r.calorieHandler.GetStatus)
+
+	e.GET("/login", r.userHandler.Login)
 }
