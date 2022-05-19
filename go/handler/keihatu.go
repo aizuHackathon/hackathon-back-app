@@ -19,7 +19,7 @@ type (
 	}
 
 	JSONKeihatuIndex struct {
-		Keihatus *response.Keihatus `json:"keihatus"`
+		Keihatu *response.Keihatu `json:"keihatu"`
 	}
 )
 
@@ -30,15 +30,13 @@ func NewKeihatu() IKeihatu {
 }
 
 func (h *Keihatu) Index(c echo.Context) error {
-	keihatus, err := h.keihatuService.GetAllKeihatus()
+
+	keihatu, err := h.keihatuService.GetKeihatuByID()
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}
-	if len(*keihatus) == 0 {
-		return c.JSON(http.StatusBadRequest, "keihatu is not found")
-	}
 
 	return c.JSON(200, &JSONKeihatuIndex{
-		Keihatus: response.NewKeihatus(keihatus),
+		Keihatu: response.NewKeihatu(keihatu),
 	})
 }

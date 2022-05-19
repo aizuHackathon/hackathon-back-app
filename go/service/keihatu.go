@@ -7,7 +7,7 @@ import (
 
 type (
 	IKeihatu interface {
-		GetAllKeihatus() (*model.Keihatus, error)
+		GetKeihatuByID() (*model.Keihatu, error)
 	}
 	Keihatu struct {
 		repository repository.IKeihatu
@@ -20,8 +20,8 @@ func NewKeihatu() IKeihatu {
 	}
 }
 
-func (s *Keihatu) GetAllKeihatus() (*model.Keihatus, error) {
-	m, err := s.repository.KeihatuByIDs([]int64{})
+func (s *Keihatu) GetKeihatuByID() (*model.Keihatu, error) {
+	m, err := s.repository.KeihatuByID()
 	if err != nil {
 		return nil, err
 	}

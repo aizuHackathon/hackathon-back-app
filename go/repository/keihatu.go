@@ -4,13 +4,15 @@ import (
 	"app/db"
 	"app/model"
 	"fmt"
+	"math/rand"
+	"time"
 
 	"github.com/gocraft/dbr"
 )
 
 type (
 	IKeihatu interface {
-		KeihatuByIDs(ids []int64) (*model.Keihatus, error)
+		KeihatuByID() (*model.Keihatu, error)
 	}
 
 	Keihatu struct {
@@ -24,18 +26,18 @@ func NewKeihatu() IKeihatu {
 	}
 }
 
-func (r *Keihatu) KeihatuByIDs(ids []int64) (*model.Keihatus, error) {
-	m := &model.Keihatus{}
-	if len(ids) != 0 {
-		_, err := r.session.Select("*").From("Keihatus").Where("id IN ?", ids).Load(m)
-		if err != nil {
-			return nil, fmt.Errorf("fetch error :%v", err)
-		}
-		return m, nil
-	}
-	_, err := r.session.Select("*").From("Keihatus").Load(m)
+func (r *Keihatu) KeihatuByID() (*model.Keihatu, error) {
+	m := &model.Keihatu{}
+	idsLength := &model.Count{}
+	_, err := r.session.Select("count(*) as value").From("Keihatu").Load(idsLength)
 	if err != nil {
 		return nil, fmt.Errorf("fetch error :%v", err)
+	}
+	rand.Seed(time.Now().UnixNano())
+	randId := rand.Int63n(idsLength.Value)
+	_, error := r.session.Select("*").From("Keihatu").Where("id =?", randId).Load(m)
+	if error != nil {
+		return nil, fmt.Errorf("fetch error :%v", error)
 	}
 	return m, nil
 }

@@ -38,7 +38,7 @@ func Init(e *echo.Echo) {
 
 func (r V1) withNone(e *echo.Echo) {
 	e.GET("/users", r.userHandler.Index)
-	e.GET("/keihatus", r.keihatuHandler.Index)
+	e.GET("/keihatu", r.keihatuHandler.Index)
 	e.GET("/weight", r.weightHandler.Index)
 
 }

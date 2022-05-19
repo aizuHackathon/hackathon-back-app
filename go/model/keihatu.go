@@ -5,4 +5,6 @@ type Keihatu struct {
 	Value string
 }
 
-type Keihatus []Keihatu
+type Count struct {
+	Value int64
+}
