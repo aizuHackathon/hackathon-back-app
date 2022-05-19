@@ -10,7 +10,7 @@ import (
 
 type (
 	ICalorie interface {
-		ByUserID(id int64, calorieType int64) (*model.Calories, error)
+		ByUserIdCalorieType(id int64, calorieType model.CalorieType) (*model.Calories, error)
 	}
 
 	Calorie struct {
@@ -24,7 +24,7 @@ func NewCalorie() ICalorie {
 	}
 }
 
-func (r *Calorie) ByUserID(id int64, calorieType int64) (*model.Calories, error) {
+func (r *Calorie) ByUserIdCalorieType(id int64, calorieType model.CalorieType) (*model.Calories, error) {
 	m := &model.Calories{}
 	_, err := r.session.Select("*").From("calories").
 		Where("user_id = ?", id).

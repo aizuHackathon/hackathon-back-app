@@ -7,7 +7,7 @@ import (
 
 type (
 	ICalorie interface {
-		GetCaloriesByUserID(id int64, calorieType int64) (*model.Calories, error)
+		GetCaloriesByUserIdCalorieType(id int64, calorieType model.CalorieType) (*model.Calories, error)
 	}
 
 	Calorie struct {
@@ -21,8 +21,8 @@ func NewCalorie() ICalorie {
 	}
 }
 
-func (s *Calorie) GetCaloriesByUserID(id int64, calorieType int64) (*model.Calories, error) {
-	m, err := s.repository.ByUserID(id, calorieType)
+func (s *Calorie) GetCaloriesByUserIdCalorieType(id int64, calorieType model.CalorieType) (*model.Calories, error) {
+	m, err := s.repository.ByUserIdCalorieType(id, calorieType)
 	if err != nil {
 		return nil, err
 	}

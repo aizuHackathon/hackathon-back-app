@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"app/model"
 	"app/response"
 	"app/service"
 	"fmt"
@@ -43,11 +44,12 @@ func (h *Calorie) Index(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, "id is invalid")
 	}
-	calorieType, err := strconv.ParseInt(queryCalorieType, 10, 64)
+	calorieTypeInt64, err := strconv.ParseInt(queryCalorieType, 10, 64)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, "calorie_type is invalid")
 	}
-	calories, err := h.calorieService.GetCaloriesByUserID(userId, calorieType)
+	calorieType := model.CalorieType(calorieTypeInt64)
+	calories, err := h.calorieService.GetCaloriesByUserIdCalorieType(userId, calorieType)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}
