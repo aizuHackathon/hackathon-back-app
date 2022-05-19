@@ -10,7 +10,7 @@ import (
 type (
 	ICalorie interface {
 		GetCaloriesByUserIdCalorieType(id int64, calorieType model.CalorieType) (*model.Calories, error)
-		Create(f *form.Calorie, userId int64, calorieType int64) error
+		Create(f *form.Calorie, userId int64, calorieType model.CalorieType) error
 	}
 
 	Calorie struct {
@@ -33,7 +33,7 @@ func (s *Calorie) GetCaloriesByUserIdCalorieType(id int64, calorieType model.Cal
 	return m, nil
 }
 
-func (s *Calorie) Create(f *form.Calorie, userId int64, calorieType int64) error {
+func (s *Calorie) Create(f *form.Calorie, userId int64, calorieType model.CalorieType) error {
 	m := &model.CreateCalorie{
 		User_ID:      userId,
 		Calorie_type: calorieType,

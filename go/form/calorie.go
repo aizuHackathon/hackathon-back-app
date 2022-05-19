@@ -7,7 +7,7 @@ import (
 
 type (
 	Calorie struct {
-		Calorie int64 `json:"calorie" valid:"required~user calorie を入力してください"`
+		Calorie int64 `json:"calorie" valid:"required~calorie calorie を入力してください"`
 	}
 )
 
