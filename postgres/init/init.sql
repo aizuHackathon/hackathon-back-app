@@ -12,7 +12,8 @@ CREATE TABLE users
     pass       VARCHAR(200),
     state      INTEGER            DEFAULT 0,
     created_at timestamp NOT NULL default current_timestamp,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    UNIQUE (name)
 );
 
 INSERT INTO users(name, height, sex, old, pass)
