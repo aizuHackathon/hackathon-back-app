@@ -25,10 +25,6 @@ type CreateCalorie struct {
 	Value        int64
 }
 
-type Status struct {
-	Value int64
-}
-
 func (c CalorieType) IsInvalid() bool {
 	switch c {
 	case CalorieTypeMeal, CalorieTypeWorkout:

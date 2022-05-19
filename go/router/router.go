@@ -13,17 +13,19 @@ type (
 	}
 
 	V1 struct {
-		userHandler    handler.IUser
-		weightHandler  handler.IWeight
-		calorieHandler handler.ICalorie
+		userHandler      handler.IUser
+		weightHandler    handler.IWeight
+		calorieHandler   handler.ICalorie
+		evolutionHandler handler.IEvolution
 	}
 )
 
 func Init(e *echo.Echo) {
 	var r IV1 = &V1{
-		userHandler:    handler.NewUser(),
-		weightHandler:  handler.NewWeight(),
-		calorieHandler: handler.NewCalorie(),
+		userHandler:      handler.NewUser(),
+		weightHandler:    handler.NewWeight(),
+		calorieHandler:   handler.NewCalorie(),
+		evolutionHandler: handler.NewEvolution(),
 	}
 
 	r.withNone(e)
@@ -46,9 +48,9 @@ func (r V1) withNone(e *echo.Echo) {
 	e.GET("/calorie", r.calorieHandler.Index)
 	e.POST("/calorie", r.calorieHandler.Create)
 
-	e.GET("/name", r.userHandler.CheckName)
+	e.GET("/evolution", r.evolutionHandler.Index)
 
-	e.GET("/evolution", r.calorieHandler.GetStatus)
+	e.GET("/name", r.userHandler.CheckName)
 
 	e.GET("/login", r.userHandler.Login)
 }

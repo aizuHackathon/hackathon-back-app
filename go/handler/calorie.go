@@ -15,7 +15,6 @@ import (
 type (
 	ICalorie interface {
 		Index(c echo.Context) error
-		GetStatus(c echo.Context) error
 		Create(c echo.Context) error
 	}
 
@@ -66,23 +65,6 @@ func (h *Calorie) Index(c echo.Context) error {
 	return c.JSON(200, &JSONCalorieIndex{
 		Calories: response.NewCalories(calories),
 	})
-}
-
-func (h *Calorie) GetStatus(c echo.Context) error {
-	queryId := c.QueryParam("id")
-	if len(queryId) == 0 {
-		return c.JSON(http.StatusBadRequest, "id is required")
-	}
-	userId, err := strconv.ParseInt(queryId, 10, 64)
-	if err != nil {
-		return c.JSON(http.StatusBadRequest, "id is invalid")
-	}
-	status, err := h.calorieService.GetStatus(userId)
-	if err != nil {
-		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
-	}
-
-	return c.JSON(200, status)
 }
 
 func (h *Calorie) Create(c echo.Context) error {
