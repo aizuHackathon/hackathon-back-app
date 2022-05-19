@@ -11,6 +11,7 @@ type (
 	IUser interface {
 		GetAllUsers() (*model.Users, error)
 		GetNameCount(f *form.UserName) (int64, error)
+		GetUserIdByNamePass(name, pass string) (*int64, error)
 		Create(f *form.User) error
 	}
 
@@ -43,6 +44,15 @@ func (s *User) GetNameCount(f *form.UserName) (int64, error) {
 	}
 
 	return count, nil
+}
+
+func (s *User) GetUserIdByNamePass(name, pass string) (*int64, error) {
+	id, err := s.userRepository.GetIDByNamePass(name, pass)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user id name: %v, pass: %v, err: %w", name, pass, err)
+	}
+
+	return id, nil
 }
 
 func (s *User) Create(f *form.User) error {

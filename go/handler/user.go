@@ -14,6 +14,7 @@ type (
 	IUser interface {
 		Index(c echo.Context) error
 		CheckName(c echo.Context) error
+		Login(c echo.Context) error
 		Create(c echo.Context) error
 	}
 
@@ -23,6 +24,10 @@ type (
 
 	JSONUserIndex struct {
 		Users *response.Users `json:"users"`
+	}
+
+	JSONUserID struct {
+		ID *int64 `json:"id"`
 	}
 )
 
@@ -61,6 +66,26 @@ func (h *User) CheckName(c echo.Context) error {
 	}
 
 	return c.JSON(201, nil)
+}
+
+func (h *User) Login(c echo.Context) error {
+	name := c.QueryParam("name")
+	if len(name) == 0 {
+		return c.JSON(http.StatusBadRequest, "name is required")
+	}
+	pass := c.QueryParam("pass")
+	if len(pass) == 0 {
+		return c.JSON(http.StatusBadRequest, "pass is required")
+	}
+
+	id, err := h.userService.GetUserIdByNamePass(name, pass)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
+	}
+
+	return c.JSON(201, &JSONUserID{
+		ID: id,
+	})
 }
 
 func (h *User) Create(c echo.Context) error {
