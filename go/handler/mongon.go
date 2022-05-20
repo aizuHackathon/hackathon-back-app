@@ -30,7 +30,7 @@ func NewMongon() IMongon {
 }
 
 func (h *Mongon) Index(c echo.Context) error {
-	mongons, err := h.mongonService.GetAllMongons()
+	mongons, err := h.mongonService.GetMongon()
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}

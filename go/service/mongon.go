@@ -7,7 +7,7 @@ import (
 
 type (
 	IMongon interface {
-		GetAllMongons() (*model.Mongons, error)
+		GetMongon() (*model.Mongons, error)
 	}
 
 	Mongon struct {
@@ -21,7 +21,7 @@ func NewMongon() IMongon {
 	}
 }
 
-func (s *Mongon) GetAllMongons() (*model.Mongons, error) {
+func (s *Mongon) GetMongon() (*model.Mongons, error) {
 	m, err := s.repository.ByIDs([]int64{})
 	if err != nil {
 		return nil, err
