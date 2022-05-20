@@ -53,3 +53,13 @@ VALUES (1, 0, 100),
        (2, 0, 100),
        (2, 0, 200),
        (2, 1, 400);
+
+CREATE TABLE Mongons (
+    ID SERIAL NOT NULL,
+    Mongon VARCHAR(200),
+    PRIMARY KEY (ID)
+);
+
+INSERT INTO Mongons VALUES
+       (1, '運動しようぜ'),
+       (2, '運動したいぜ');
