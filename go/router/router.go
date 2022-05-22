@@ -13,21 +13,23 @@ type (
 	}
 
 	V1 struct {
+		keihatuHandler   handler.IKeihatu
 		userHandler      handler.IUser
 		weightHandler    handler.IWeight
 		calorieHandler   handler.ICalorie
 		evolutionHandler handler.IEvolution
-		MongonHandler handler.IMongon
+		MongonHandler    handler.IMongon
 	}
 )
 
 func Init(e *echo.Echo) {
 	var r IV1 = &V1{
+		keihatuHandler:   handler.NewKeihatu(),
 		userHandler:      handler.NewUser(),
 		weightHandler:    handler.NewWeight(),
 		calorieHandler:   handler.NewCalorie(),
 		evolutionHandler: handler.NewEvolution(),
-		MongonHandler: handler.NewMongon(),
+		MongonHandler:    handler.NewMongon(),
 	}
 
 	r.withNone(e)
@@ -41,6 +43,8 @@ func Init(e *echo.Echo) {
 }
 
 func (r V1) withNone(e *echo.Echo) {
+	e.GET("/keihatu", r.keihatuHandler.Index)
+
 	e.GET("/users", r.userHandler.Index)
 	e.POST("/users", r.userHandler.Create)
 
