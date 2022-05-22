@@ -42,9 +42,38 @@ INSERT INTO keihatu(value) VALUES
 ('今日も一日頑張ろう！'),
 ('腹筋１００回、腕立て１００回、スクワット１００回！');
 
-INSERT INTO Weights(ID, User_ID, Value) VALUES 
-(1, 1, 78.2),
-(2, 2, 58.8),
-(3, 2, 45.8);
+INSERT INTO weights(user_id, value) VALUES 
+(1, 78.2),
+(2, 58.8),
+(2, 45.8);
 
 
+CREATE TABLE mongons (
+    ID SERIAL,
+    Mongon VARCHAR(200),
+    PRIMARY KEY (ID)
+);
+
+INSERT INTO mongons VALUES (1, '運動しようぜ'),
+    (2, '運動したいぜ'),
+    (3, '運動しない？');
+
+
+CREATE TABLE calories
+(
+    id           SERIAL,
+    user_id      SERIAL    NOT NULL,
+    calorie_type INTEGER,
+    value        REAL,
+    created_at   timestamp NOT NULL default current_timestamp,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_Users FOREIGN KEY (user_id) REFERENCES Users (id) ON DELETE CASCADE
+);
+
+INSERT INTO calories(user_id, calorie_type, value)
+VALUES (1, 0, 100),
+       (1, 1, 200),
+       (1, 1, 400),
+       (2, 0, 100),
+       (2, 0, 200),
+       (2, 1, 400);
