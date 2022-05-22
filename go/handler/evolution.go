@@ -16,6 +16,10 @@ type (
 	Evolution struct {
 		evolutionService service.IEvolution
 	}
+
+	JSONEvolutionIndex struct {
+		Evolution int64 `json:"status"`
+	}
 )
 
 func NewEvolution() IEvolution {
@@ -38,5 +42,7 @@ func (h *Evolution) Index(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}
 
-	return c.JSON(200, status)
+	return c.JSON(200, &JSONEvolutionIndex{
+		Evolution: status,
+	})
 }
