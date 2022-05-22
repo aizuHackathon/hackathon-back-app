@@ -36,4 +36,5 @@ CREATE TABLE mongons (
 );
 
 INSERT INTO mongons VALUES (1, '運動しようぜ'),
-    (2, '運動したいぜ');
+    (2, '運動したいぜ'),
+    (3, '運動しない？');

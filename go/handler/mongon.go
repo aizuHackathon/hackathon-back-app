@@ -19,7 +19,7 @@ type (
 	}
 
 	JSONMongonIndex struct {
-		Mongons *response.Mongons `json:"mongon"`
+		Mongon *response.Mongon `json:"mongon"`
 	}
 )
 
@@ -30,15 +30,12 @@ func NewMongon() IMongon {
 }
 
 func (h *Mongon) Index(c echo.Context) error {
-	mongons, err := h.mongonService.GetMongon()
+	mongon, err := h.mongonService.GetMongon()
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}
-	if len(*mongons) == 0 {
-		return c.JSON(http.StatusBadRequest, "mongon is not found")
-	}
 
 	return c.JSON(200, &JSONMongonIndex{
-		Mongons: response.NewMongons(mongons),
+		Mongon: response.NewMongon(mongon),
 	})
 }

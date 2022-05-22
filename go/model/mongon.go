@@ -5,4 +5,6 @@ type Mongon struct {
 	Mongon string
 }
 
-type Mongons []Mongon
+type Count struct {
+	Value int64
+}
