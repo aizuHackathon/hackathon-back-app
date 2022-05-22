@@ -37,8 +37,16 @@ func Init(e *echo.Echo) {
 }
 
 func (r V1) withNone(e *echo.Echo) {
-	e.GET("/users", r.userHandler.Index)
+
 	e.GET("/keihatu", r.keihatuHandler.Index)
+
+	e.POST("/users", r.userHandler.Create)
+
 	e.GET("/weight", r.weightHandler.Index)
+	e.POST("/weight", r.weightHandler.Create)
+
+	e.GET("/name", r.userHandler.CheckName)
+
+	e.GET("/login", r.userHandler.Login)
 
 }

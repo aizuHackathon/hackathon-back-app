@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"app/form"
 	"app/response"
 	"app/service"
 	"fmt"
@@ -13,6 +14,7 @@ import (
 type (
 	IWeight interface {
 		Index(c echo.Context) error
+		Create(c echo.Context) error
 	}
 
 	Weight struct {
@@ -51,4 +53,25 @@ func (h *Weight) Index(c echo.Context) error {
 	return c.JSON(200, &JSONWeightIndex{
 		Weights: response.NewWeights(weights),
 	})
+}
+
+func (h *Weight) Create(c echo.Context) error {
+	ID := c.QueryParam("id")
+	if len(ID) == 0 {
+		return c.JSON(http.StatusBadRequest, "id is required")
+	}
+	userId, err := strconv.ParseInt(ID, 10, 64)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, "id is invalid")
+	}
+	f, err := form.NewWeight(c)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
+	}
+
+	if err := h.weightService.Create(f, userId); err != nil {
+		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
+	}
+
+	return c.JSON(201, nil)
 }

@@ -31,7 +31,7 @@ func NewKeihatu() IKeihatu {
 
 func (h *Keihatu) Index(c echo.Context) error {
 
-	keihatu, err := h.keihatuService.GetKeihatuByID()
+	keihatu, err := h.keihatuService.GetKeihatu()
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, fmt.Sprintf("%v", err))
 	}
