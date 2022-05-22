@@ -17,6 +17,7 @@ type (
 		weightHandler    handler.IWeight
 		calorieHandler   handler.ICalorie
 		evolutionHandler handler.IEvolution
+		MongonHandler handler.IMongon
 	}
 )
 
@@ -26,6 +27,7 @@ func Init(e *echo.Echo) {
 		weightHandler:    handler.NewWeight(),
 		calorieHandler:   handler.NewCalorie(),
 		evolutionHandler: handler.NewEvolution(),
+		MongonHandler: handler.NewMongon(),
 	}
 
 	r.withNone(e)
@@ -53,4 +55,6 @@ func (r V1) withNone(e *echo.Echo) {
 	e.GET("/name", r.userHandler.CheckName)
 
 	e.GET("/login", r.userHandler.Login)
+
+	e.GET("/mongon", r.MongonHandler.Index)
 }
