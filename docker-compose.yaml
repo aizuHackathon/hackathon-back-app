@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   app:
     build: .
@@ -14,7 +14,7 @@ services:
   postgres:
     build: ./postgres/
     ports:
-      - "3306:3306"
+      - "3300:3300"
     environment:
       POSTGRES_USER: admin
       POSTGRES_DB: admin
