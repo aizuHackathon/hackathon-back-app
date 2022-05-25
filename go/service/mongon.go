@@ -23,6 +23,9 @@ func NewMongon() IMongon {
 
 func (s *Mongon) GetMongon() (*model.Mongon, error) {
 	Id, err := s.repository.RandomId()
+	if err != nil {
+		return nil, err
+	}
 
 	m, err := s.repository.MongonByRandom(Id)
 	if err != nil {

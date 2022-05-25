@@ -29,7 +29,7 @@ func NewMongon() IMongon {
 
 func (r *Mongon) MongonByRandom(id int64) (*model.Mongon, error) {
 	m := &model.Mongon{}
-	_, err := r.session.Select("*").From("Mongons").Where("id = ?", id).Load(m)
+	_, err := r.session.Select("*").From("mongons").Where("id = ?", id).Load(m)
 	if err != nil {
 		return nil, fmt.Errorf("fetch error :%v", err)
 	}
@@ -39,7 +39,7 @@ func (r *Mongon) MongonByRandom(id int64) (*model.Mongon, error) {
 
 func (r *Mongon) RandomId() (int64, error) {
 	idsLength := &model.Count{}
-	_, err := r.session.Select("count(*) as value").From("Mongons").Load(idsLength)
+	_, err := r.session.Select("count(*) as value").From("mongons").Load(idsLength)
 
 	if err != nil {
 		return 0, fmt.Errorf("fetch error :%v", err)
