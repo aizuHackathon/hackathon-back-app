@@ -27,7 +27,7 @@ func (s *Mongon) GetMongon() (*model.Mongon, error) {
 		return nil, err
 	}
 
-	m, err := s.repository.MongonByRandom(Id)
+	m, err := s.repository.ById(Id)
 	if err != nil {
 		return nil, err
 	}

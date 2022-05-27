@@ -12,7 +12,7 @@ import (
 
 type (
 	IMongon interface {
-		MongonByRandom(id int64) (*model.Mongon, error)
+		ById(id int64) (*model.Mongon, error)
 		RandomId() (int64, error)
 	}
 
@@ -27,7 +27,7 @@ func NewMongon() IMongon {
 	}
 }
 
-func (r *Mongon) MongonByRandom(id int64) (*model.Mongon, error) {
+func (r *Mongon) ById(id int64) (*model.Mongon, error) {
 	m := &model.Mongon{}
 	_, err := r.session.Select("*").From("mongons").Where("id = ?", id).Load(m)
 	if err != nil {
