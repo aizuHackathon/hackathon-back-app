@@ -4,13 +4,16 @@ import (
 	"app/db"
 	"app/model"
 	"fmt"
+	"math/rand"
+	"time"
 
 	"github.com/gocraft/dbr"
 )
 
 type (
 	IMongon interface {
-		MongonByRandom(ids int64) (*model.Mongon, error)
+		ById(id int64) (*model.Mongon, error)
+		RandomId() (int64, error)
 	}
 
 	Mongon struct {
@@ -24,12 +27,26 @@ func NewMongon() IMongon {
 	}
 }
 
-func (r *Mongon) MongonByRandom(ids int64) (*model.Mongon, error) {
+func (r *Mongon) ById(id int64) (*model.Mongon, error) {
 	m := &model.Mongon{}
-	_, err := r.session.Select("*").From("Mongons").Where("id = ?", ids).Load(m)
+	_, err := r.session.Select("*").From("mongons").Where("id = ?", id).Load(m)
 	if err != nil {
 		return nil, fmt.Errorf("fetch error :%v", err)
 	}
 	
 	return m, nil
+}
+
+func (r *Mongon) RandomId() (int64, error) {
+	idsLength := &model.Count{}
+	_, err := r.session.Select("count(*) as value").From("mongons").Load(idsLength)
+
+	if err != nil {
+		return 0, fmt.Errorf("fetch error :%v", err)
+	}
+
+	rand.Seed(time.Now().UnixNano())
+	randId := rand.Int63n(idsLength.Value) + 1
+
+	return randId, nil
 }
